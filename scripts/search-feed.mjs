@@ -41,10 +41,11 @@ function sections(file, url) {
     out.push({
       title: text(h2[1]),
       text: p ? sentence(p) : "",
-      /* the h3 of a section have no id of their own: they are matched and
-       * shown, and lead to the section */
-      headings: headings.map((h) => [h, id]),
-      terms: words(text(body)),
+      /* the h3 of a section have no id of their own, and the entry's url
+       * already carries the section's: a heading here would send a reader to
+       * `#id#id` in a box that appends its anchor. Their words are matched. */
+      headings: [],
+      terms: words(`${headings.join(" ")} ${text(body)}`),
       url: `${url}#${id}`,
     });
   }
