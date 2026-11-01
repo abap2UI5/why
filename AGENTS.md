@@ -18,6 +18,7 @@ it depends on abap2UI5/docs or abap2UI5/playground at build time.
 | `src/components/` | `Stats` (the headline tiles under the hero), `Icon` (inline marks) |
 | `src/styles/global.css` | The one stylesheet; light and dark follow the system |
 | `public/` | Font (Inter, self-hosted), logo, icons, `apps/` (one screenshot per example app; the hero shows one of them) |
+| `scripts/search-feed.mjs` | Runs after `astro build` and writes `dist/search.json`: one entry per section with an id and per FAQ question, read from the built pages. abap2UI5/docs fetches it at build time into the family's one search index (the home page and the playground read it); the shape `{ site, url, entries: [{ title, text, headings, terms, url }] }` is the same on every site of the family. A page that yields nothing fails the build |
 | `test/site.test.mjs` | `node:test` over the built `dist/index.html` |
 | `.github/workflows/pages.yml` | Build + test on every PR; deploy on main |
 

@@ -151,3 +151,20 @@ test("the release the page names is the newest release of the framework", async 
   const latest = tag.replace(/-\w+$/, "").replace(/\.\d+$/, "");
   assert.equal(named[1], latest, `the page says Release ${named[1]}, the newest release is ${tag}`);
 });
+
+test("the search feed: every section and every question, at an address that exists", () => {
+  const feed = JSON.parse(fs.readFileSync(path.join(DIST, "search.json"), "utf8"));
+  assert.equal(feed.site, "Why abap2UI5");
+  assert.equal(feed.url, "https://abap2ui5.github.io/why/");
+  assert.ok(feed.entries.length >= 20, `${feed.entries.length} entries`);
+  for (const e of feed.entries) {
+    assert.ok(e.title, "a title");
+    assert.match(e.url, /^https:\/\/abap2ui5\.github\.io\/why\//);
+    const [page, id] = e.url.replace("https://abap2ui5.github.io/why/", "").split("#");
+    const html = fs.readFileSync(path.join(DIST, page, "index.html"), "utf8");
+    if (id) assert.match(html, new RegExp(`id="${id}"`), e.url);
+  }
+  for (const id of ["what-it-costs", "what-you-keep", "when-to-use-it-and-when-not"]) {
+    assert.ok(feed.entries.some((e) => e.url.endsWith(`#${id}`)), `#${id} is findable`);
+  }
+});
