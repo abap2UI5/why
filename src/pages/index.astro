@@ -73,25 +73,37 @@ const moreReferences = [
   ["2023", "See abap2UI5 on ABAP Open Source Projects", "dotabap.org", "https://dotabap.org/"],
 ];
 
-/* The market, as a manager compares it: abap2UI5, SAP's own two routes, the
- * commercial UI5 app platforms and low-code builders sold on top of SAP.
- * A row where abap2UI5 is not ahead is marked `even`: it gets no tick. */
-const rivals = ["RAP + Fiori Elements", "Freestyle UI5 + OData", "Commercial UI5 & low-code platforms"];
+/* The market, as a manager compares it: abap2UI5, SAP's own two routes, and
+ * the two kinds of commercial tool sold for building UI5 apps on SAP - the
+ * low-code builder installed in the SAP system and the platform beside it.
+ * No vendor is named: offers and prices change, a named comparison ages,
+ * and the column describes what a reader would buy; `market` says what each
+ * column stands for. A row where abap2UI5 is not ahead is marked `even`: it
+ * gets a dash, not a tick. */
+const rivals = ["RAP + Fiori Elements", "Custom SAPUI5 app", "Low-code builder in your SAP system", "Low-code platform beside SAP"];
+const market = [
+  ["RAP + Fiori Elements", "SAP's standard route: a list report or an object page generated from CDS annotations on a RAP service. Part of the SAP license, supported by SAP."],
+  ["Custom SAPUI5 app", "A JavaScript project with its own OData service, built in Business Application Studio or VS Code and deployed to the system or to BTP. What a UI5 agency delivers."],
+  ["Low-code builder in your SAP system", "A vendor's designer, installed as an add-on or a transport: screens are clicked together, stored in the vendor's tables and built into UI5 apps by its runtime. Licensed per user, device or developer. Several vendors sell one."],
+  ["Low-code platform beside SAP", "A server or cloud tenant of its own, reaching SAP over connectors; built for citizen developers, SAP is one of many backends. General-purpose platforms and SAP's own no-code builder belong here."],
+];
 const compare = [
-  ["License cost", "None: MIT, for any number of users, systems and apps", "Part of the SAP license", "Part of the SAP license", "Subscription or per-user fees, renewed every year"],
-  ["Who builds the apps", "The ABAP team you already have", "ABAP plus CDS, RAP and annotation specialists", "JavaScript / UI5 developers", "Developers trained on the vendor's tool"],
-  ["Time to productivity", "Minutes to the first screen, hours to the first app: an ABAP developer learns UI5's controls from the examples, not a new language", "A CDS, RAP and annotation skill set, and Business Application Studio", "A JavaScript and UI5 tool chain: UI5 tooling, Git, npm", "The vendor's training"],
-  ["Where the business logic lives", "In ABAP, next to the data, as it does today", "In ABAP, behind CDS and annotations", "Split: JavaScript in the browser, a service in ABAP", "In the vendor's tool"],
-  ["First screen", "Minutes", "After the model, the service, the project and a deployment", "After the project setup and a deployment", "After the platform is installed and licensed"],
-  ["Freedom of the UI", "Every UI5 control, any layout", "SAP's floorplans and their extension points", "Every UI5 control", "What the vendor's designer offers"],
-  ["Older SAP releases", "NetWeaver 7.02 up to ABAP Cloud, one source", "7.5x and later", "Yes, with OData effort per release", "Depends on the vendor's add-on"],
-  ["Performance: what a click costs", "One plain HTTP request carrying only what changed; no app code and no logic in the browser", "OData calls with metadata, batch and draft handling, and the Fiori Elements runtime in the browser", "OData calls and an app bundle per app, logic in the browser", "The vendor's runtime in the browser"],
-  ["Extra infrastructure", "None: one endpoint on your SAP system", "Fiori frontend server and deployment", "Frontend deployment (BSP, BTP or web server)", "The vendor's add-on, server or cloud tenant"],
-  ["Lock-in", "Low: apps are plain ABAP classes written against one interface, and the framework stays in your system", "SAP's programming model", "Low", "Apps live in the vendor's runtime and repository"],
-  ["Source code", "Open, every line, on GitHub", "Closed", "UI5 open, your app yours", "Closed"],
-  ["Standard transactional apps", "Possible, but hand-built; the standard route is RAP", "Its home ground: list report and object page from annotations", "Hand-built", "From the vendor's templates", "even"],
-  ["Offline", "Not built for it: an app needs its connection to SAP", "Offline with extra tooling", "Possible, with effort", "Depends on the vendor", "even"],
-  ["Support", "Slack and GitHub issues, open to anyone at any time; more by mail, planned together. No SLA in a contract", "SAP support", "SAP support for UI5; your app is yours", "The vendor's SLA, in the contract", "even"],
+  ["License cost", "None: MIT, for any number of users, systems and apps", "Part of the SAP license", "Part of the SAP license", "Subscription per user, device or developer, monthly or yearly, often with a minimum term and a setup fee", "Subscription per user or app, plus the tenant"],
+  ["Who builds the apps", "The ABAP team you already have", "ABAP plus CDS, RAP and annotation skills", "JavaScript / UI5 developers", "The ABAP team, in the vendor's designer, after its training", "Citizen developers, or developers trained on the platform"],
+  ["Time to the first screen", "Minutes; hours to the first app. An ABAP developer learns UI5's controls from the examples, not a new language", "After the model, the service, the project and a deployment", "After the project setup, the tool chain and a deployment", "After the add-on is installed and licensed; the vendors say days to the first app", "After the tenant and the connectors are set up"],
+  ["What an app is", "One ABAP class", "CDS views, behavior definitions, a service binding and a generated UI5 project", "A UI5 project and an OData service", "Entries in the designer's tables, built into a UI5 app per screen", "A model on the platform"],
+  ["Where the business logic lives", "In ABAP, next to the data, as it does today", "In ABAP, behind CDS and annotations", "Split: JavaScript in the browser, a service in ABAP", "In ABAP classes bound to the designer's views; the screen in the vendor's tables", "On the platform; SAP is reached over connectors"],
+  ["Freedom of the UI", "Every UI5 control, any layout", "SAP's floorplans and their extension points", "Every UI5 control", "The components the designer offers", "The platform's widgets; a Fiori look where the vendor offers one"],
+  ["SAP releases", "NetWeaver 7.02 up to ABAP Cloud, one source", "7.5x and later", "Yes, with OData effort per release", "Depends on the vendor: some from NetWeaver 7.x, some S/4HANA only", "Any, over the connector"],
+  ["Performance: what a click costs", "One plain HTTP request carrying only what changed; no app code and no logic in the browser", "OData calls with metadata, batch and draft handling, and the Fiori Elements runtime in the browser", "OData calls and an app bundle per app, logic in the browser", "A generated UI5 app per screen, with the vendor's runtime in the browser", "A round trip through the platform and its connector"],
+  ["Extra infrastructure and deployment", "None: one endpoint on your SAP system, and the system serves the screen", "Fiori frontend server; a deployment per app and version", "A frontend deployment (BSP, BTP or web server)", "The vendor's add-on or transport, a license key per system, the designer's build per app", "The platform's server or cloud tenant"],
+  ["Lock-in", "Low: apps are plain ABAP classes written against one interface, and the framework stays in your system", "SAP's programming model", "Low", "Screens live in the vendor's tables and run only on its runtime; leaving means rebuilding", "Apps live on the platform"],
+  ["Source code", "Open, every line, on GitHub", "Closed", "UI5 open, your app yours", "Closed; some vendors export the generated app", "Closed"],
+  ["Click-together designer", "None: an app is code, with hundreds of examples to start from and an AI builder that writes the class", "None: annotations, in ADT", "None: code", "Yes: drag-and-drop, templates, versions, for people who do not write code", "Yes", "even"],
+  ["Standard transactional apps", "Possible, but hand-built; the standard route is RAP", "Its home ground: list report and object page from annotations", "Hand-built", "From the vendor's templates", "From the platform's templates", "even"],
+  ["Offline and a native client", "Not built for it: a browser app with its connection to SAP", "Offline with extra tooling", "Possible, with effort", "Some vendors ship a client of their own, with offline", "Usually a native client, offline possible", "even"],
+  ["SAP certification, add-on delivery", "Not on offer: no company behind it. The source, the public tests and the review pack instead", "SAP's own", "Yours to certify", "Often SAP-certified, delivered as an add-on or a transport", "A certified integration, beside SAP", "even"],
+  ["Support", "Slack and GitHub issues, open to anyone at any time; more by mail, planned together. No SLA in a contract", "SAP support", "SAP support for UI5; your app is yours", "The vendor's SLA, in the contract", "The platform's SLA, in the contract", "even"],
 ];
 const useIt = [
   ["The team is ABAP.", "No JavaScript, no UI5 tooling, no training project before the S/4HANA project. An app is one class in ADT or SE80: debugged, checked by ATC, transported and unit-tested like any other, nothing a developer has not done a hundred times. What they still learn: UI5's controls, from the examples, not a new language."],
@@ -105,11 +117,12 @@ const notIt = [
   ["The app must work offline.", "Every click is one request to the SAP system. A device without a network is not what it is for; live data on a connected screen is."],
   ["Your guideline mandates SAP's programming model.", "abap2UI5 is clean core in the technical sense, but it is not RAP. The usual outcome is a scope, not a replacement."],
   ["You want the transaction as it is, in a browser.", "SAP GUI for HTML and Screen Personas keep the transaction and change how it looks; abap2UI5 is a new screen on the same logic, built one at a time. If the screen itself may stay, SAP's own route is the shorter one."],
+  ["The business should click its screens together itself.", "abap2UI5 is a tool for the ABAP team: an app is code, reviewed and transported as code. Where a department is to build screens without a developer, a low-code designer is the tool, with the governance it brings along. What abap2UI5 offers that department is the AI App Builder, which writes a first class from a description; the review stays with a developer."],
   ["Your rules need an SLA on paper.", "Support happens in the open: anyone can write in the Slack channel or open an issue or a pull request on GitHub, at any time, and that is where answers come fastest. If you need more than that, write to the maintainers by mail and plan it together; what is not on offer is an SLA in a contract."],
 ];
 
-/* Governance: an app is an ABAP class, against a tool that stores apps as
- * configuration, which is how the commercial builders work. */
+/* Governance: an app is an ABAP class, against a low-code builder installed
+ * in the SAP system, which stores its screens as configuration. */
 const keep = [
   ["What an app is", "An ABAP class", "Entries in the tool's tables, read by its runtime"],
   ["Where a change is made", "In the development system, in the ABAP tools", "Wherever the tool's designer is open, possibly production"],
@@ -214,15 +227,18 @@ const doors = [
     <div class="wrap">
       <p class="kicker">Compared with the market</p>
       <h2 id="h-fit">Where it is the shorter path, and where it is not</h2>
-      <p class="intro">SAP's own routes and the UI5 app platforms and low-code builders sold on top of SAP, side by side. The last three rows are where abap2UI5 is not ahead.</p>
+      <p class="intro">Four ways to get a UI5 app on SAP, side by side with abap2UI5: SAP's standard route, a custom UI5 app, and the two kinds of commercial tool sold for it. No vendor is named: offers and prices change, and a named comparison ages; each column describes what you would buy. Rows marked with a dash are where abap2UI5 is not ahead.</p>
+      <dl class="market">
+        {market.map(([h, t]) => <div><dt>{h}</dt><dd>{t}</dd></div>)}
+      </dl>
       <div class="table compare">
         <table>
           <thead><tr><th scope="col"></th><th scope="col" class="us">abap2UI5</th>{rivals.map((r) => <th scope="col">{r}</th>)}</tr></thead>
-          <tbody>{compare.map(([k, a, b, c, d, even]) => (
+          <tbody>{compare.map(([k, a, b, c, d, e, even]) => (
             <tr>
               <th scope="row">{k}</th>
               <td class={even ? "us even" : "us"} data-th="abap2UI5">{a}</td>
-              {[b, c, d].map((t, i) => <td data-th={rivals[i]}>{t}</td>)}
+              {[b, c, d, e].map((t, i) => <td data-th={rivals[i]}>{t}</td>)}
             </tr>
           ))}</tbody>
         </table>
@@ -248,8 +264,8 @@ const doors = [
       <p class="intro">The logic stays in ABAP; logon, authorizations and data stay SAP's. One ABAP class per app, the business logic in it, no generated artifacts, no tables that describe a screen. Nothing of the app runs in the browser, so there is no client logic to secure. Every rule that applies to ABAP, from code review to the four-eyes principle on transports, applies to an app unchanged.</p>
       <div class="table">
         <table>
-          <thead><tr><th scope="col"></th><th scope="col" class="us">abap2UI5</th><th scope="col">A tool that stores apps as configuration</th></tr></thead>
-          <tbody>{keep.map(([k, a, b]) => <tr><th scope="row">{k}</th><td class="us" data-th="abap2UI5">{a}</td><td data-th="A tool that stores apps as configuration">{b}</td></tr>)}</tbody>
+          <thead><tr><th scope="col"></th><th scope="col" class="us">abap2UI5</th><th scope="col">A low-code builder in your SAP system</th></tr></thead>
+          <tbody>{keep.map(([k, a, b]) => <tr><th scope="row">{k}</th><td class="us" data-th="abap2UI5">{a}</td><td data-th="A low-code builder in your SAP system">{b}</td></tr>)}</tbody>
         </table>
       </div>
       <ul class="plain two">
@@ -276,7 +292,7 @@ const doors = [
         </div>
         <div class="sheet">
           {cost.map(([what, note, amount]) => <div class="sheet-line"><span class="sheet-what">{what}<small>{note}</small></span><span class={amount === "0" ? "sheet-amount zero" : "sheet-amount"}>{amount}</span></div>)}
-          <p class="sheet-note">Commercial SAP app platforms charge per named user or device, monthly, often with minimum terms and setup fees. Here the one line that grows with adoption is zero.</p>
+          <p class="sheet-note">A low-code builder bills per user, device or developer, monthly or yearly, often with a minimum term of a year or two and a setup fee; a platform beside SAP adds its tenant. Here the one line that grows with adoption is zero, and the apps you build with it carry no fee either.</p>
         </div>
       </div>
       <ul class="strings" id="no-strings-attached">{strings.map(([b, t]) => <li><b>{b}</b><span>{t}</span></li>)}</ul>
@@ -353,7 +369,7 @@ const doors = [
     <div class="wrap">
       <p class="kicker">FAQ</p>
       <h2 id="h-obj">What decision makers ask</h2>
-      <p class="intro">What if the maintainers stop, who do we call, will an upgrade break it, do we need BTP, when abap2UI5 and when a custom SAPUI5 app, will our users accept it: twenty questions, answered on the <a href={`${base}faq/`}>FAQ page</a>.</p>
+      <p class="intro">What if the maintainers stop, who do we call, will an upgrade break it, do we need BTP, how does it compare with the low-code builders sold for SAP, when abap2UI5 and when a custom SAPUI5 app, will our users accept it: twenty-five questions, answered on the <a href={`${base}faq/`}>FAQ page</a>.</p>
     </div>
   </section>
 
