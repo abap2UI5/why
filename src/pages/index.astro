@@ -20,6 +20,7 @@ const PLAYGROUND = "https://abap2ui5.github.io/playground/";
 const INSIGHTS = "https://abap2ui5.github.io/insights/";
 const GITHUB = "https://github.com/abap2UI5/abap2UI5";
 const GITHUB_PAGE = "https://github.com/abap2UI5/why";
+const WHO_RUNS_IT_ISSUE = `${GITHUB}/issues/new?template=who_runs_it.yml`;
 const SLACK = "https://abapgit.slack.com/join/shared_invite/zt-46tqufaht-QlrxTzlDqlx85CWbeUnOqg#/shared-invite/email";
 const MAIL = "contact@abap2UI5.org";
 const base = import.meta.env.BASE_URL;
@@ -37,14 +38,16 @@ const useCases = [
 ];
 
 /* Who runs it. Only what a reader can check: the companies that said so,
- * and the figures GitHub shows. The figures are from October 2026. */
+ * and the figures GitHub shows. The figures are from November 2026; the
+ * clone count is GitHub's traffic page (Insights > Traffic), which the
+ * maintainers see and quote here with its date. */
 const companies = [
   ["Emineo", "https://emineo.ch/", "In production", "Apps for warehouse management and production, on desktop and mobile devices"],
   ["Swiss Krono", "https://www.swisskrono.com/", "In production", "Apps for warehouse management, on mobile devices"],
   ["Logali Group", "https://logaligroup.com", "Training", "Webinars and certifications for abap2UI5"],
 ];
 const facts = [
-  ["Since January 2023", "open source on GitHub, MIT licensed"],
+  ["2,900+ systems in two weeks", "pulled the framework from GitHub, 23 October to 5 November 2026; every abapGit pull is one clone, each system counted once"],
   ["25+ contributors", "from several companies, every change public"],
   ["Release 1.148", "October 2026; a release most months, each one listed"],
   ["Every release tested", "on NetWeaver 7.02, Standard ABAP and ABAP Cloud, on the oldest and the newest UI5"],
@@ -378,10 +381,10 @@ const doors = [
     <div class="wrap">
       <p class="kicker">Who runs it</p>
       <h2 id="h-who">In production, in the open, since 2023</h2>
-      <p class="intro">Two companies run it in production and say so here; one offers training and certification for it. We know of many more installations than this list shows, and the list is meant to grow. The project is public down to every change, so every figure below can be checked.</p>
+      <p class="intro">Two companies run it in production and say so here; one offers training and certification for it. The installations are far more than the list shows: in the first two weeks of November 2026, more than 2,900 systems pulled the framework from GitHub. The list is meant to grow, and the project is public down to every change.</p>
       <ul class="logos">
         {companies.map(([name, href, tag, text]) => <li><a href={href}>{name}</a><small>{tag}</small><span>{text}</span></li>)}
-        <li class="join"><a href={`${GITHUB_PAGE}/edit/main/src/pages/index.astro`}>Your company here</a><small>Add a row</small><span>Running abap2UI5? Add one row by pull request, or send it to <a href={`mailto:${MAIL}`}>{MAIL}</a>. The next reader is looking for exactly your industry.</span></li>
+        <li class="join"><a href={WHO_RUNS_IT_ISSUE}>Your company here</a><small>Add a row</small><span>Running abap2UI5? Fill in <a href={WHO_RUNS_IT_ISSUE}>one short form on GitHub</a>, add the row by pull request, or send it to <a href={`mailto:${MAIL}`}>{MAIL}</a>. The next reader is looking for exactly your industry.</span></li>
       </ul>
       <ul class="facts">{facts.map(([b, t]) => <li><b>{b}</b><span>{t}</span></li>)}</ul>
       <h3 class="refs-title">Talks, articles and videos</h3>
@@ -390,7 +393,7 @@ const doors = [
         <summary>{moreReferences.length} more, 2023 to 2026</summary>
         <ul class="refs">{moreReferences.map(([year, title, where, href]) => <li><time>{year}</time><a href={href}>{title}</a><small>{where}</small></li>)}</ul>
       </details>
-      <p class="more">→ Running abap2UI5, or written about it? <a href={`${GITHUB_PAGE}/edit/main/src/pages/index.astro`}>Add your row</a>, or write to <a href={`mailto:${MAIL}`}>{MAIL}</a>. The figures: <a href={GITHUB}>the repository</a> and its <a href={`${GITHUB}/releases`}>releases</a>.</p>
+      <p class="more">→ Running abap2UI5, or written about it? <a href={WHO_RUNS_IT_ISSUE}>Add your row</a>, or write to <a href={`mailto:${MAIL}`}>{MAIL}</a>. The figures: <a href={GITHUB}>the repository</a> and its <a href={`${GITHUB}/releases`}>releases</a>.</p>
     </div>
   </section>
 
