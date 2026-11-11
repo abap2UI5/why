@@ -49,9 +49,12 @@ npm run check    # build + test, what CI runs
   Figures a reader can check (since when, contributors, the latest release) are
   fine; they carry their date and link to GitHub.
 - **Short, honest, in this order.** A reader gives the page a few minutes:
-  the visible text outside `<details>` stays under 4,000 words (the test holds
-  it; the ceiling is generous for now - everything goes in first, a trimming
-  pass follows later). The comparison names where abap2UI5 is *not* ahead (rows marked `even`,
+  the visible text outside `<details>` stays under 3,100 words (the test holds
+  it). What a decision does not turn on folds: the comparison keeps eight rows
+  open and the rest under "more rows", next to what each column stands for.
+  One architecture picture (inline SVG, coloured by the stylesheet's tokens)
+  shows where the parts are. The first screen uses a manager's words: ADT,
+  SE80 and ATC appear under "Where teams choose abap2UI5", not in the hero. The comparison names where abap2UI5 is *not* ahead (rows marked `even`,
   the "Where something else fits better" box) and the support it has: in the
   open first - anyone can open an issue or send a pull request on GitHub at any
   time - and more by mail to contact@abap2UI5.org on request; what is not on
