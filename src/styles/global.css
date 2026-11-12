@@ -489,3 +489,38 @@ code { font-family: var(--mono); font-size: .9em; }
   .faq summary::after { display: none; }
   .section { padding: 28px 0; }
 }
+
+/* ---------- the architecture picture and what folds under the comparison ---------- */
+/* Inline SVG, coloured by the page's tokens, so it follows light and dark with
+ * everything else. On a phone it keeps its size and scrolls sideways. */
+.arch { margin: 32px 0 0; }
+.arch-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); padding: 20px 16px 12px; }
+.arch svg { display: block; width: 100%; min-width: 820px; height: auto; margin: 0 auto; max-width: 950px; }
+.arch figcaption { margin-top: 10px; font-size: 14px; color: var(--muted); }
+.arch .dg-box { fill: var(--bg); stroke: var(--line); stroke-width: 1.2; }
+.arch .dg-us { fill: var(--good-soft); stroke: var(--good); stroke-width: 1.6; }
+.arch .dg-extra { fill: var(--neutral-soft); stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 5 4; }
+.arch .dg-line { stroke: var(--muted); stroke-width: 1.4; }
+.arch .dg-head { fill: var(--muted); }
+.arch text { font-family: var(--font); }
+.arch .dg-h { font-size: 15px; font-weight: 700; fill: var(--ink); }
+.arch .dg-h.us { fill: var(--good); }
+.arch .dg-t { font-size: 13px; font-weight: 600; fill: var(--ink); }
+.arch .dg-s { font-size: 12px; fill: var(--muted); }
+
+.legend { margin: 28px 0 0; font-size: 14px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 22px; align-items: center; }
+.legend + .table { margin-top: 12px; }
+.legend .item { white-space: nowrap; }
+.legend .mark { display: inline-block; min-width: 22px; margin-right: 6px; padding: 1px 6px; border-radius: 6px; text-align: center; font-weight: 800; }
+.legend .mark.yes { color: var(--good); background: var(--good-soft); }
+.legend .mark.even { color: var(--muted); background: var(--neutral-soft); }
+
+.fold { margin-top: 14px; }
+.fold summary { cursor: pointer; list-style: none; font-size: 15px; font-weight: 600; color: var(--brand); }
+.fold summary::-webkit-details-marker { display: none; }
+.fold summary::before { content: "+ "; }
+.fold[open] summary::before { content: "− "; }
+.fold .table { margin-top: 12px; }
+.fold .market { margin-top: 12px; }
+
+.facts-list.beside { margin-top: 28px; }
