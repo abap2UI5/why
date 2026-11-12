@@ -19,7 +19,10 @@ const ROOT = "https://abap2ui5.github.io/why/";
 
 const decode = (s) =>
   s.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;|&#x27;/g, "'").replace(/&nbsp;/g, " ");
-const text = (html) => decode(html.replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim();
+// A tag is a space (a word ends at </td>), but not before punctuation:
+// `<a>Who runs it</a>, and` is "Who runs it, and", not "Who runs it , and".
+const text = (html) =>
+  decode(html.replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").replace(/ ([.,;:!?)])/g, "$1").trim();
 const sentence = (s, max = 220) => {
   const first = s.match(/^.{20,}?[.!?](\s|$)/)?.[0].trim() ?? s;
   return first.length > max ? `${first.slice(0, max - 1).trimEnd()}…` : first;
